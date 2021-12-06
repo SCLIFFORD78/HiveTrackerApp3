@@ -23,7 +23,7 @@ class MainApp : Application() {
         loggedInUser = UserModel()
         var defaultUser =   UserModel()
         defaultUser.firstName = "John"
-        defaultUser.secondName = "Clifford"
+        defaultUser.lastName = "Clifford"
         defaultUser.email = "johnc@gmail.com"
         UserManager.create(defaultUser)
 

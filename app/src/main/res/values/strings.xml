@@ -42,7 +42,7 @@
     <string name="prompt_password">Password</string>
     <string name="prompt_username">Username</string>
     <string name="prompt_firstname">First Name</string>
-    <string name="prompt_secondname">Second Name</string>
+    <string name="prompt_lastName">Second Name</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_register_short">Register</string>
@@ -55,7 +55,7 @@
     <string name="invalid_email">Not a valid email</string>
     <string name="invalid_email_notUnique">Email Address Already used</string>
     <string name="invalid_firstname">Not a valid first name</string>
-    <string name="invalid_secondname">Not a valid second name</string>
+    <string name="invalid_lastName">Not a valid second name</string>
     <string name="login_failed">"Login failed"</string>
 
     <string name="button_update">UPDATE</string>
@@ -97,4 +97,29 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="messageLoading">Please Wait while the Hives are Loading...</string>
+
+    <!-- START Firebase Resources-->
+
+    <string name="label_emailpassword">Email/Password Authentication</string>
+    <string name="desc_emailpassword">Use an email and password to authenticate with Firebase.</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="send_link">Send Link</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="verify_email">Verify Email</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="loading">Loading…</string>
+    <string name="signed_in">Signed In</string>
+    <string name="signed_out">Signed Out</string>
+    <string name="token_null">Token: null</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="desc_firebase_lockup">Firebase logo and name</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="firebase_status_fmt">Firebase User: %s</string>
+    <string name="firebase_user_management">Firebase User Management</string>
+    <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
+    <string name="emailpassword_title_text">Please Login Below</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
 </resources>

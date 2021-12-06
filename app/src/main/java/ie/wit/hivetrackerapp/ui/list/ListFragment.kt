@@ -24,13 +24,13 @@ import timber.log.Timber
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import ie.wit.hivetrackerapp.R
+import ie.wit.hivetrackerapp.adapters.HiveTrackerAdapter
 import ie.wit.hivetrackerapp.databinding.FragmentListBinding
 import ie.wit.hivetrackerapp.models.HiveModel
 import ie.wit.hivetrackerapp.models.UserModel
 import ie.wit.hivetrackerapp.ui.utils.createLoader
 import ie.wit.hivetrackerapp.ui.utils.hideLoader
 import ie.wit.hivetrackerapp.ui.utils.showLoader
-import org.wit.hivetrackerapp.adapters.HiveTrackerAdapter
 
 class ListFragment : Fragment(), HiveTrackerAdapter.OnHiveClickListener {
     private var _fragBinding: FragmentListBinding? = null
@@ -83,7 +83,7 @@ class ListFragment : Fragment(), HiveTrackerAdapter.OnHiveClickListener {
             users?.let {
                 users as ArrayList<UserModel>
                 for (user in users){
-                    names.add(0,(user.firstName+" "+user.secondName))
+                    names.add(0,(user.firstName+" "+user.lastName))
                 }
                 //hideLoader(loader)
                 //checkSwipeRefresh()

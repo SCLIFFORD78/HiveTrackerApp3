@@ -9,7 +9,7 @@ import java.util.*
 data class UserModel(var id: Long = 0,
                      var password: String = "",
                      var firstName: String = "",
-                     var secondName: String = "",
+                     var lastName: String = "",
                      var image: Uri = Uri.EMPTY,
                      var userName : String = "",
                      var dateJoined: Date = Date(),

@@ -32,7 +32,7 @@ object UserManager  : UserStore {
             founduser.email = user.email
             founduser.firstName = user.firstName
             founduser.image = user.image
-            founduser.secondName = user.secondName
+            founduser.lastName = user.lastName
             founduser.userName = user.userName
             founduser.password = user.password
             logAll()

@@ -11,4 +11,5 @@
     <color name="color_secondary">#2196F3</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#4c90af</color>
+    <color name="grey_500">#9E9E9E</color>
 </resources>

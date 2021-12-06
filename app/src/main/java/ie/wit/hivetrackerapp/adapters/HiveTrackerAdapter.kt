@@ -1,4 +1,4 @@
-package org.wit.hivetrackerapp.adapters
+package ie.wit.hivetrackerapp.adapters
 
 import android.view.LayoutInflater
 import android.view.View

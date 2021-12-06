@@ -40,7 +40,8 @@
             <item
                 android:id="@+id/loginOrRegisterFragment"
                 android:icon="@drawable/ic_menu_logout"
-                android:title="@string/action_logout" />
+                android:title="@string/action_logout"
+                android:onClick="signOut"/>
 
         </menu>
     </item>
