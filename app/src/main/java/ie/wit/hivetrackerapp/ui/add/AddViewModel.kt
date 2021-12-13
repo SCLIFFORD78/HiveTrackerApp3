@@ -3,6 +3,8 @@ package ie.wit.hivetrackerapp.ui.add
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import ie.wit.hivetrackerapp.main.MainApp
 import ie.wit.hivetrackerapp.models.HiveManager
 import ie.wit.hivetrackerapp.models.HiveModel
@@ -22,8 +24,8 @@ class AddViewModel : ViewModel() {
         HiveManager.create(hive)
     }
 
-    fun loggedInUser(): UserModel {
-        var user = app.loggedInUser
+    fun loggedInUser(): FirebaseUser? {
+        var user = FirebaseAuth.getInstance().currentUser
         return user
     }
 

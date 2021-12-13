@@ -39,7 +39,7 @@
                 android:title="@string/action_account" />
             <item
                 android:id="@+id/loginOrRegisterFragment"
-                android:icon="@drawable/ic_menu_logout"
+                android:icon="@android:drawable/ic_menu_revert"
                 android:title="@string/action_logout"
                 android:onClick="signOut"/>
 

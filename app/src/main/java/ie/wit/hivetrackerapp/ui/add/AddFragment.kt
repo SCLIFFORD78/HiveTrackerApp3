@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 
 import ie.wit.hivetrackerapp.R
@@ -107,10 +108,10 @@ class AddFragment : Fragment() {
             hive.tag = layout.hiveTitle.text.toString().toLong()
             hive.description = layout.description.text.toString()
             hive.type = spinner.selectedItem.toString()
-            hive.userID = addViewModel.loggedInUser().id
+            //hive.userID = FirebaseAuth.getInstance().currentUser.email
             addViewModel.create(hive.copy())
             Navigation.findNavController(this.requireView()).navigate(R.id.listFragment)
-            Timber.i("Add Hive Button Pressed: ${addViewModel.loggedInUser().userName}")
+            Timber.i("Add Hive Button Pressed: ${FirebaseAuth.getInstance().currentUser}")
         }
     }
 

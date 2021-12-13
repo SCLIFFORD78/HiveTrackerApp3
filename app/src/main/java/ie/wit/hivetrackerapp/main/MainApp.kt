@@ -1,6 +1,7 @@
 package ie.wit.hivetrackerapp.main
 
 import android.app.Application
+import com.google.firebase.auth.FirebaseAuth
 import ie.wit.hivetrackerapp.models.*
 import timber.log.Timber
 import timber.log.Timber.i
@@ -12,7 +13,6 @@ class MainApp : Application() {
     lateinit var hives: List<HiveModel>
     //var users: UserStore = UserJSONStore(applicationContext)
     lateinit var users: List<UserModel>
-    var loggedInUser = UserModel()
 
 
     override fun onCreate() {
@@ -20,7 +20,6 @@ class MainApp : Application() {
         Timber.plant(Timber.DebugTree())
         hives = HiveManager.findAll()
         users = UserManager.findAll()
-        loggedInUser = UserModel()
         var defaultUser =   UserModel()
         defaultUser.firstName = "John"
         defaultUser.lastName = "Clifford"

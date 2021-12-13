@@ -25,5 +25,9 @@
         android:name="ie.wit.hivetrackerapp.ui.update.UpdateFragment"
         android:label="fragment_update"
         tools:layout="@layout/fragment_update" />
+    <activity
+        android:id="@+id/login"
+        android:name="ie.wit.hivetrackerapp.ui.auth.Login"
+        android:label="Login" />
 
 </navigation>
