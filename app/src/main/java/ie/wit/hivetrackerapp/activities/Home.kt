@@ -49,7 +49,7 @@ class Home : AppCompatActivity(), HiveTrackerAdapter.Communicator {
         appBarConfiguration = AppBarConfiguration(setOf(
             R.id.addFragment,
             R.id.listFragment,
-            R.id.hiveMapsActivity,
+            R.id.mapsFragment,
             R.id.aboutusFragment,
             //R.id.updateFragment,
             R.id.accountDetailsFragment,

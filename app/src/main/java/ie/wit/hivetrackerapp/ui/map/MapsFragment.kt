@@ -1,76 +1,80 @@
-package ie.wit.hivetrackerapp.activities
+package ie.wit.hivetrackerapp.ui.map
 
-import com.google.android.material.snackbar.Snackbar
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import ie.wit.hivetrackerapp.R
+import androidx.fragment.app.Fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import ie.wit.hivetrackerapp.databinding.ActivityHiveMapsBinding
-import ie.wit.hivetrackerapp.databinding.ContentHiveMapsBinding
-import ie.wit.hivetrackerapp.main.MainApp
+import ie.wit.hivetrackerapp.R
+import ie.wit.hivetrackerapp.databinding.FragmentAddBinding
+import ie.wit.hivetrackerapp.databinding.FragmentListBinding
+import ie.wit.hivetrackerapp.databinding.FragmentMapsBinding
 import ie.wit.hivetrackerapp.models.HiveManager
 import ie.wit.hivetrackerapp.models.HiveModel
-import ie.wit.hivetrackerapp.models.HiveStore
+import ie.wit.hivetrackerapp.ui.utils.createLoader
 
+class MapsFragment : Fragment(), GoogleMap.OnMarkerClickListener {
 
-class HiveMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener  {
-
-    private lateinit var binding: ActivityHiveMapsBinding
-    private lateinit var contentBinding: ContentHiveMapsBinding
+    private var _fragBinding: FragmentMapsBinding? = null
+    private val fragBinding get() = _fragBinding!!
     lateinit var map: GoogleMap
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _fragBinding = FragmentMapsBinding.inflate(inflater, container, false)
 
-        binding = ActivityHiveMapsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        setSupportActionBar(binding.toolbar)
-        contentBinding = ContentHiveMapsBinding.bind(binding.root)
-        contentBinding.mapView.onCreate(savedInstanceState)
-        contentBinding.mapView.getMapAsync{
+        fragBinding.mapView.onCreate(savedInstanceState)
+        fragBinding.mapView.getMapAsync{
             map = it
             configureMap()
         }
+        val root = fragBinding.root
 
 
+        return root
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
-        contentBinding.mapView.onDestroy()
+        fragBinding.mapView.onDestroy()
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        contentBinding.mapView.onLowMemory()
+        fragBinding.mapView.onLowMemory()
     }
 
     override fun onPause() {
         super.onPause()
-        contentBinding.mapView.onPause()
+        fragBinding.mapView.onPause()
     }
 
     override fun onResume() {
         super.onResume()
-        contentBinding.mapView.onResume()
+        fragBinding.mapView.onResume()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        contentBinding.mapView.onSaveInstanceState(outState)
+        fragBinding.mapView.onSaveInstanceState(outState)
     }
 
     fun configureMap() {
@@ -85,11 +89,13 @@ class HiveMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener  {
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        val hiveID: TextView = findViewById(R.id.hiveID)
+        val hiveID: TextView = fragBinding.hiveID
         hiveID.text = marker.title
-        val currentDescription: TextView = findViewById(R.id.currentDescription)
+        val currentDescription: TextView = fragBinding.currentDescription
         currentDescription.text = marker.title?.let { HiveManager.findByTag(it.toLong())?.type }
 
         return false
     }
+
+
 }

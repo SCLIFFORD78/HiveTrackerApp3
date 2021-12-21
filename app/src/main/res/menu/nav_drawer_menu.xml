@@ -13,7 +13,7 @@
             android:icon="@drawable/ic_menu_list"
             android:title="@string/action_list" />
         <item
-            android:id="@+id/hiveMapsActivity"
+            android:id="@+id/mapsFragment"
             android:icon="@android:drawable/ic_menu_mapmode"
             android:title="@string/menu_mapMode"/>
         <item
