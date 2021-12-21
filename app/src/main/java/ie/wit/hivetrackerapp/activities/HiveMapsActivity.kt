@@ -8,6 +8,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import ie.wit.hivetrackerapp.R
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -22,7 +23,7 @@ import ie.wit.hivetrackerapp.models.HiveModel
 import ie.wit.hivetrackerapp.models.HiveStore
 
 
-class HiveMapsActivity : AppCompatActivity() {
+class HiveMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener  {
 
     private lateinit var binding: ActivityHiveMapsBinding
     private lateinit var contentBinding: ContentHiveMapsBinding
@@ -74,11 +75,21 @@ class HiveMapsActivity : AppCompatActivity() {
 
     fun configureMap() {
         map.uiSettings.setZoomControlsEnabled(true)
+        map.setOnMarkerClickListener(this)
         HiveManager.findAll().forEach {
             val loc = LatLng(it.lat, it.lng)
-            val options = MarkerOptions().title(it.id.toString()).position(loc)
+            val options = MarkerOptions().title(it.tag.toString()).position(loc)
             map.addMarker(options)?.tag = it.id
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
         }
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        val hiveID: TextView = findViewById(R.id.hiveID)
+        hiveID.text = marker.title
+        val currentDescription: TextView = findViewById(R.id.currentDescription)
+        currentDescription.text = marker.title?.let { HiveManager.findByTag(it.toLong())?.type }
+
+        return false
     }
 }
