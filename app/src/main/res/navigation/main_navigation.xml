@@ -29,5 +29,10 @@
         android:id="@+id/login"
         android:name="ie.wit.hivetrackerapp.ui.auth.Login"
         android:label="Login" />
+    <activity
+        android:id="@+id/hiveMapsActivity"
+        android:name="ie.wit.hivetrackerapp.activities.HiveMapsActivity"
+        android:label="activity_hive_maps"
+        tools:layout="@layout/activity_hive_maps" />
 
 </navigation>

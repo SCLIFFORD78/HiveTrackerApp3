@@ -3,7 +3,7 @@
     package="ie.wit.hivetrackerapp">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,11 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HiveTrackerApp">
+        <activity
+            android:name=".activities.HiveMapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_hive_maps"
+            android:theme="@style/Theme.HiveTrackerApp.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <activity android:name=".activities.Login"
+
+        <activity
+            android:name=".activities.Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,10 +33,7 @@
         </activity>
         <activity
             android:name=".activities.Home"
-            android:exported="true"
-            >
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".activities.MapsActivity"
             android:exported="false"
