@@ -31,7 +31,7 @@ class ListViewModel : ViewModel() {
 
     fun load() {
         try {
-            hivesList.value = HiveManager.findAll()
+            hivesList.value = HiveManager.findAll().sortedBy { it.tag }.toMutableList()
             Timber.i("Report Load Success : ${hivesList.value.toString()}")
             usersList.value = UserManager.findAll()
             Timber.i("Report Load Success : ${usersList.value.toString()}")
