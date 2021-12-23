@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -16,6 +17,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.squareup.picasso.Picasso
 import ie.wit.hivetrackerapp.R
 import ie.wit.hivetrackerapp.databinding.FragmentAddBinding
 import ie.wit.hivetrackerapp.databinding.FragmentListBinding
@@ -93,6 +95,9 @@ class MapsFragment : Fragment(), GoogleMap.OnMarkerClickListener {
         hiveID.text = marker.title
         val currentDescription: TextView = fragBinding.currentDescription
         currentDescription.text = marker.title?.let { HiveManager.findByTag(it.toLong())?.type }
+        Picasso.get().load(HiveManager.findByTag( marker.title.toString().toLong())?.image).into(fragBinding.imageView2)
+       // val image: ImageView = fragBinding.imageView2
+        //image.setImageURI(HiveManager.findByTag( marker.title.toString().toLong())?.image)
 
         return false
     }
