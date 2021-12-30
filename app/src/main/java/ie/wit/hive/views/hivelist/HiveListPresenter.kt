@@ -26,6 +26,18 @@ class HiveListPresenter(private val view: HiveListView) {
 
     suspend fun getHives() = app.hives.findAll()
 
+    suspend fun getHiveByTag(tag:Long):List<HiveModel>{
+        var list : ArrayList<HiveModel> = arrayListOf()
+        var hives = getHives()
+        val foundhive = hives.find { p -> p.tag == tag }
+        if (foundhive != null) {
+            list.add(0,foundhive)
+        }
+
+        return list
+    }
+
+
     fun doAddHive() {
         val launcherIntent = Intent(view, HiveView::class.java)
         editIntentLauncher.launch(launcherIntent)

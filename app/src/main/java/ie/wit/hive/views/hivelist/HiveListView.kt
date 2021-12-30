@@ -2,6 +2,7 @@ package ie.wit.hive.views.hivelist
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -37,18 +38,15 @@ class HiveListView : AppCompatActivity(), HiveListener {
         presenter = HiveListPresenter(this)
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        updateRecyclerView()
+        updateRecyclerView(0)
     }
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
+
 
     override fun onResume() {
 
         //update the view
         super.onResume()
-        updateRecyclerView()
+        updateRecyclerView(0)
         binding.recyclerView.adapter?.notifyDataSetChanged()
         i("recyclerView onResume")
 
@@ -73,11 +71,75 @@ class HiveListView : AppCompatActivity(), HiveListener {
 
     }
 
-    private fun updateRecyclerView(){
-        GlobalScope.launch(Dispatchers.Main){
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        val search = menu.findItem(R.id.appSearchBar)
+        val searchView = search.actionView as SearchView
+        searchView.queryHint = "Tag Number or 0 for all hives"
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                var value = ""
+                var num:Long = 0
+                if (query == ""){
+                    value = num.toString()
+                }else{
+                    if (query != null) {
+                        value = query
+                    }
+                }
+                if(value.toString().toLong() > 0 && value !=null){
+                    updateRecyclerView(query.toString().toLong())
+                    searchView.clearFocus()
+                }else if(value.toString().toInt() == 0 ){
+                    updateRecyclerView(0)
+                    searchView.clearFocus()
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                var value = ""
+                var num:Long = 0
+                if (newText == ""){
+                    value = num.toString()
+                }else{
+                    if (newText != null) {
+                        value = newText
+                    }
+                }
+                if(value.toString().toLong() > 0 && value !=null){
+                    updateRecyclerView(newText.toString().toLong())
+                    searchView.clearFocus()
+                }else if(value.toString().toInt() == 0 ){
+                    updateRecyclerView(0)
+                    searchView.clearFocus()
+                }
+
+
+
+                return false
+            }
+
+
+        })
+        return super.onCreateOptionsMenu(menu)
+    }
+
+
+    private fun updateRecyclerView(tag:Long){
+        var test = tag
+        if (tag > 0 && tag != null){
+            GlobalScope.launch(Dispatchers.Main) {
+                binding.recyclerView.adapter =
+                    HiveAdapter(presenter.getHiveByTag(tag), this@HiveListView)
+            }
+        }else{
+            GlobalScope.launch(Dispatchers.Main){
             binding.recyclerView.adapter =
                 HiveAdapter(presenter.getHives(), this@HiveListView)
         }
-    }
+
+
+        } }
 
 }
