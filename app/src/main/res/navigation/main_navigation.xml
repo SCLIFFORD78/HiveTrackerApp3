@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/listFragment">
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="ie.wit.hivetrackerapp.ui.list.ListFragment"
+        android:label="List of Hives"
+        tools:layout="@layout/fragment_list" />
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="ie.wit.hivetrackerapp.ui.add.AddFragment"
+        android:label="Add Hive to Database"
+        tools:layout="@layout/fragment_add" />
+    <fragment
+        android:id="@+id/aboutusFragment"
+        android:name="ie.wit.hivetrackerapp.ui.about.AboutFragment"
+        android:label="About App"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="ie.wit.hivetrackerapp.ui.update.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" />
+    <activity
+        android:id="@+id/login"
+        android:name="ie.wit.hivetrackerapp.ui.auth.Login"
+        android:label="Login" />
+
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="ie.wit.hivetrackerapp.ui.map.MapsFragment"
+        android:label="Map of Hive Locations"
+        tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="ie.wit.hivetrackerapp.ui.register.RegisterFragment"
+        android:label="RegisterFragment" />
+
+</navigation>
