@@ -19,7 +19,7 @@ class HiveMapPresenter(val view: HiveMapView) {
         map.setOnMarkerClickListener(view)
         app.hives.findAll().forEach {
             val loc = LatLng(it.location.lat, it.location.lng)
-            val options = MarkerOptions().title(it.title).position(loc)
+            val options = MarkerOptions().title(it.tag.toString()).position(loc)
             map.addMarker(options)?.tag = it.id
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
         }

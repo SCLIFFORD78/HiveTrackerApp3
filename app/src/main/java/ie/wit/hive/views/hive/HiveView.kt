@@ -35,12 +35,12 @@ class HiveView : AppCompatActivity() {
         presenter = HivePresenter(this)
 
         binding.chooseImage.setOnClickListener {
-            presenter.cacheHive(binding.hiveTitle.text.toString(), binding.description.text.toString())
+            presenter.cacheHive(binding.hiveTitle.text.toString().toLong(), binding.description.text.toString())
             presenter.doSelectImage()
         }
 
         binding.mapView2.setOnClickListener {
-            presenter.cacheHive(binding.hiveTitle.text.toString(), binding.description.text.toString())
+            presenter.cacheHive(binding.hiveTitle.text.toString().toLong(), binding.description.text.toString())
             presenter.doSetLocation()
         }
 
@@ -74,7 +74,7 @@ class HiveView : AppCompatActivity() {
                 } else {
                     GlobalScope.launch(Dispatchers.IO) {
                         presenter.doAddOrSave(
-                            binding.hiveTitle.text.toString(),
+                            binding.hiveTitle.text.toString().toLong(),
                             binding.description.text.toString()
                         )
                     }
@@ -94,7 +94,7 @@ class HiveView : AppCompatActivity() {
     }
 
     fun showHive(hive: HiveModel) {
-        if (binding.hiveTitle.text.isEmpty()) binding.hiveTitle.setText(hive.title)
+        if (binding.hiveTitle.text.isEmpty()) binding.hiveTitle.setText(hive.tag.toString())
         if (binding.description.text.isEmpty())  binding.description.setText(hive.description)
 
         if (hive.image != "") {

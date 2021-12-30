@@ -1,4 +1,4 @@
-package ie.wit.hivetrackerapp
+package ie.wit.hive
 
 import ie.junit.Test
 

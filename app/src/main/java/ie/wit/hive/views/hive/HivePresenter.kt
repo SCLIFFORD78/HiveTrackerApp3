@@ -60,8 +60,8 @@ class HivePresenter(private val view: HiveView) {
     }
 
 
-    suspend fun doAddOrSave(title: String, description: String) {
-        hive.title = title
+    suspend fun doAddOrSave(tag: Long, description: String) {
+        hive.tag = tag
         hive.description = description
         if (edit) {
             app.hives.update(hive)
@@ -136,14 +136,14 @@ class HivePresenter(private val view: HiveView) {
         hive.location = location
         map?.clear()
         map?.uiSettings?.setZoomControlsEnabled(true)
-        val options = MarkerOptions().title(hive.title).position(LatLng(hive.location.lat, hive.location.lng))
+        val options = MarkerOptions().title(hive.tag.toString()).position(LatLng(hive.location.lat, hive.location.lng))
         map?.addMarker(options)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(hive.location.lat, hive.location.lng), hive.location.zoom))
         view.showHive(hive)
     }
 
-    fun cacheHive (title: String, description: String) {
-        hive.title = title;
+    fun cacheHive (tag: Long, description: String) {
+        hive.tag = tag;
         hive.description = description
     }
 

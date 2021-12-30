@@ -33,7 +33,7 @@ class HiveAdapter constructor(private var hives: List<HiveModel>,
             RecyclerView.ViewHolder(binding.root) {
 
         fun bind(hive: HiveModel, listener: HiveListener) {
-            binding.hiveTitle.text = hive.title
+            binding.hiveTitle.text = hive.tag.toString()
             binding.description.text = hive.description
             if (hive.image != ""){
                 Picasso.get()

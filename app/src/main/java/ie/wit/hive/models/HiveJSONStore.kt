@@ -36,6 +36,7 @@ class HiveJSONStore(private val context: Context) : HiveStore {
 
     override suspend fun create(hive: HiveModel) {
         hive.id = generateRandomId()
+        hive.tag = getTag()
         hives.add(hive)
         serialize()
     }
@@ -45,7 +46,7 @@ class HiveJSONStore(private val context: Context) : HiveStore {
         val hivesList = findAll() as ArrayList<HiveModel>
         var foundHive: HiveModel? = hivesList.find { p -> p.id == hive.id }
         if (foundHive != null) {
-            foundHive.title = hive.title
+            foundHive.tag = hive.tag
             foundHive.description = hive.description
             foundHive.image = hive.image
             foundHive.location = hive.location
@@ -78,6 +79,14 @@ class HiveJSONStore(private val context: Context) : HiveStore {
     }
     override suspend fun clear(){
         hives.clear()
+    }
+
+    override suspend fun getTag(): Long {
+        var num:Long = 1
+        while (hives.find { p -> p.tag == num } != null){
+            num++
+        }
+        return num
     }
 }
 

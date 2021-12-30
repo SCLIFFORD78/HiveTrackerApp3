@@ -11,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
 @Entity
 data class HiveModel(@PrimaryKey(autoGenerate = true) var id: Long = 0,
                           var fbId: String = "",
-                          var title: String = "",
+                          var tag: Long = 0,
                           var description: String = "",
                           var image: String = "",
                           @Embedded var location : Location = Location()): Parcelable

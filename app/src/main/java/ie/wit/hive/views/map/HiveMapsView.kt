@@ -45,7 +45,7 @@ class HiveMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener{
         return true
     }
     fun showHive(hive: HiveModel) {
-        contentBinding.currentTitle.text = hive.title
+        contentBinding.currentTitle.text = hive.tag.toString()
         contentBinding.currentDescription.text = hive.description
         Picasso.get()
             .load(hive.image)

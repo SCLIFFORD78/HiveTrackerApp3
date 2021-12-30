@@ -29,6 +29,7 @@ class HiveFireStore(val context: Context) : HiveStore {
         val key = db.child("users").child(userId).child("hives").push().key
         key?.let {
             hive.fbId = key
+            hive.tag = getTag()
             hives.add(hive)
             db.child("users").child(userId).child("hives").child(key).setValue(hive)
             updateImage(hive)
@@ -38,7 +39,7 @@ class HiveFireStore(val context: Context) : HiveStore {
     override suspend fun update(hive: HiveModel) {
         var foundHive: HiveModel? = hives.find { p -> p.fbId == hive.fbId }
         if (foundHive != null) {
-            foundHive.title = hive.title
+            foundHive.tag = hive.tag
             foundHive.description = hive.description
             foundHive.image = hive.image
             foundHive.location = hive.location
@@ -60,6 +61,14 @@ class HiveFireStore(val context: Context) : HiveStore {
 
     override suspend fun clear() {
         hives.clear()
+    }
+
+    override suspend fun getTag(): Long {
+        var num:Long = 1
+        while (hives.find { p -> p.tag == num } != null){
+            num++
+        }
+        return num
     }
 
     fun fetchHives(hivesReady: () -> Unit) {

@@ -37,4 +37,13 @@ class HiveStoreRoom(val context: Context) : HiveStore {
     }
     override suspend fun clear() {
     }
+
+    override suspend fun getTag(): Long {
+        var num:Long = 1
+        var hives = this.findAll()
+        while (hives.find { p -> p.tag == num } != null){
+            num++
+        }
+        return num
+    }
 }

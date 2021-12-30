@@ -7,4 +7,5 @@ interface HiveStore {
     suspend fun findById(id:Long) : HiveModel?
     suspend fun delete(hive: HiveModel)
     suspend fun clear()
+    suspend fun getTag():Long
 }

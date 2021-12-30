@@ -55,7 +55,7 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/description" />
+                app:layout_constraintTop_toBottomOf="@+id/hiveTypeSpinner" />
 
             <EditText
                 android:id="@+id/description"
@@ -81,7 +81,6 @@
                 android:layout_height="57dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="72dp"
-                android:autofillHints=""
                 android:hint="@string/hint_hiveTitle"
                 android:inputType="text"
                 android:maxLength="25"
@@ -89,11 +88,26 @@
                 android:padding="8dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="14sp"
+                android:enabled="false"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <requestFocus />
             </EditText>
+
+            <Spinner
+                android:id="@+id/hiveTypeSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:layout_gravity="center"
+                android:entries="@array/hiveType"
+                android:hint="@string/hint_hiveType"
+                android:spinnerMode="dialog"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description" />
 
             <TextView
                 android:id="@+id/lat"
