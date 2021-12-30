@@ -1,3 +1,10 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+<<<<<<< HEAD
+=======
+    <dimen name="icon_top_margin">20dp</dimen>
+    <dimen name="icon_bottom_margin">20dp</dimen>
+    <dimen name="fragment_horizontal_margin">16dp</dimen>
+    <dimen name="fragment_vertical_margin">16dp</dimen>
+>>>>>>> 20b8acfc740a8551b1e6255db86bc297bfe953b9
 </resources>
