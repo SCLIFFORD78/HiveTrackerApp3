@@ -1,8 +1,8 @@
 package ie.wit.hivetrackerapp
 
-import org.junit.Test
+import ie.junit.Test
 
-import org.junit.Assert.*
+import ie.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
