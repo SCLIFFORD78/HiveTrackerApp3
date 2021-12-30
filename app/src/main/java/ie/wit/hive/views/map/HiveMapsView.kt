@@ -2,6 +2,7 @@ package ie.wit.hive.views.map
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import com.squareup.picasso.Picasso
@@ -12,6 +13,7 @@ import ie.wit.hive.databinding.ActivityHiveMapsBinding
 import ie.wit.hive.databinding.ContentHiveMapsBinding
 import ie.wit.hive.main.MainApp
 import ie.wit.hive.models.HiveModel
+import ie.wit.hive.readImageFromPath
 
 class HiveMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener{
 
@@ -46,10 +48,15 @@ class HiveMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener{
     }
     fun showHive(hive: HiveModel) {
         contentBinding.currentTitle.text = hive.tag.toString()
-        contentBinding.currentDescription.text = hive.description
-        Picasso.get()
-            .load(hive.image)
-            .into(contentBinding.imageView2)
+        contentBinding.currentType.text = hive.type
+        if (hive.image != ""){
+            Picasso.get()
+                .load(hive.image)
+                .into(contentBinding.imageView2)
+        }else{
+            contentBinding.imageView2.setImageBitmap(readImageFromPath(this,"app/src/main/res/drawable/basic.png"))
+        }
+
     }
 
     override fun onDestroy() {

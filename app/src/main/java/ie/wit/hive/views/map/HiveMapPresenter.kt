@@ -20,14 +20,14 @@ class HiveMapPresenter(val view: HiveMapView) {
         app.hives.findAll().forEach {
             val loc = LatLng(it.location.lat, it.location.lng)
             val options = MarkerOptions().title(it.tag.toString()).position(loc)
-            map.addMarker(options)?.tag = it.id
+            map.addMarker(options)?.tag = it.tag
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
         }
     }
 
     suspend fun doMarkerSelected(marker: Marker) {
         val tag = marker.tag as Long
-        val hive = app.hives.findById(tag)
+        val hive = app.hives.findByTag(tag)
         if (hive != null) view.showHive(hive)
     }
 }

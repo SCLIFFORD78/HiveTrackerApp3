@@ -24,6 +24,10 @@ class HiveStoreRoom(val context: Context) : HiveStore {
         return dao.findById(id)
     }
 
+    override suspend fun findByTag(tag: Long): HiveModel? {
+        return dao.findByTag(tag)
+    }
+
     override suspend fun create(hive: HiveModel) {
         dao.create(hive)
     }

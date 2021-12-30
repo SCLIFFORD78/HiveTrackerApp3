@@ -15,6 +15,13 @@
     <string name="button_location">Set Location</string>
     <string name="title_activity_map">Map</string>
     <string name="title_activity_hive_maps">Map of all Hives</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_firstname">First Name</string>
+    <string name="prompt_secondname">Second Name</string>
+    <string name="action_register_short">Register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_email">Email</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

@@ -2,6 +2,8 @@ package ie.wit.hive.helpers
 
 import android.net.Uri
 import androidx.room.TypeConverter
+import java.text.DateFormat
+import java.util.*
 
 class Converters {
     @TypeConverter
@@ -13,4 +15,5 @@ class Converters {
     fun toUri(string: String): Uri {
         return Uri.parse(string)
     }
+
 }

@@ -50,6 +50,7 @@ class HiveJSONStore(private val context: Context) : HiveStore {
             foundHive.description = hive.description
             foundHive.image = hive.image
             foundHive.location = hive.location
+            foundHive.type = hive.type
         }
         serialize()
     }
@@ -62,6 +63,10 @@ class HiveJSONStore(private val context: Context) : HiveStore {
     override suspend fun findById(id:Long) : HiveModel? {
         val foundHive: HiveModel? = hives.find { it.id == id }
         return foundHive
+    }
+
+    override suspend fun findByTag(tag: Long): HiveModel? {
+        return hives.find { p -> p.tag == tag }
     }
 
     private fun serialize() {

@@ -8,10 +8,8 @@ import ie.wit.hive.main.MainApp
 import ie.wit.hive.models.HiveFireStore
 import ie.wit.hive.views.hivelist.HiveListView
 
-
-
-class LoginPresenter (val view: LoginView)  {
-    private lateinit var loginIntentLauncher : ActivityResultLauncher<Intent>
+class RegisterPresenter(val view: RegisterView) {
+    private lateinit var registerIntentLauncher : ActivityResultLauncher<Intent>
     var app: MainApp = view.application as MainApp
     var auth: FirebaseAuth = FirebaseAuth.getInstance()
     var fireStore: HiveFireStore? = null
@@ -23,32 +21,6 @@ class LoginPresenter (val view: LoginView)  {
         }
     }
 
-
-    fun doLogin(email: String, password: String) {
-        view.showProgress()
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(view) { task ->
-            if (task.isSuccessful) {
-                if (fireStore != null) {
-                    fireStore!!.fetchHives {
-                        view?.hideProgress()
-                        val launcherIntent = Intent(view, HiveListView::class.java)
-                        loginIntentLauncher.launch(launcherIntent)
-                    }
-                } else {
-                    view?.hideProgress()
-                    val launcherIntent = Intent(view, HiveListView::class.java)
-                    loginIntentLauncher.launch(launcherIntent)
-                }
-            } else {
-                view?.hideProgress()
-                view.showSnackBar("Login failed: ${task.exception?.message}")
-            }
-            view.hideProgress()
-
-        }
-
-    }
-
     fun doSignUp(email: String, password: String) {
         view.showProgress()
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(view) { task ->
@@ -56,7 +28,7 @@ class LoginPresenter (val view: LoginView)  {
                 fireStore!!.fetchHives {
                     view?.hideProgress()
                     val launcherIntent = Intent(view, HiveListView::class.java)
-                    loginIntentLauncher.launch(launcherIntent)
+                    registerIntentLauncher.launch(launcherIntent)
                 }
             } else {
                 view.showSnackBar("Login failed: ${task.exception?.message}")
@@ -65,7 +37,7 @@ class LoginPresenter (val view: LoginView)  {
         }
     }
     private fun registerLoginCallback(){
-        loginIntentLauncher =
+        registerIntentLauncher =
             view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
             {  }
     }

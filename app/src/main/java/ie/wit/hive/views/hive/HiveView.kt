@@ -68,13 +68,13 @@ class HiveView : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_save -> {
-                if (binding.hiveTitle.text.toString().isEmpty()) {
+                if (binding.description.text.toString().isEmpty()) {
                     Snackbar.make(binding.root, R.string.enter_hive_title, Snackbar.LENGTH_LONG)
                         .show()
                 } else {
                     GlobalScope.launch(Dispatchers.IO) {
                         presenter.doAddOrSave(
-                            binding.hiveTitle.text.toString().toLong(),
+                            binding.hiveTypeSpinner.selectedItem.toString(),
                             binding.description.text.toString()
                         )
                     }

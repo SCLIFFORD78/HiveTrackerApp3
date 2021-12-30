@@ -25,6 +25,10 @@ class HiveFireStore(val context: Context) : HiveStore {
         return foundHive
     }
 
+    override suspend fun findByTag(tag: Long): HiveModel? {
+        return hives.find { p -> p.tag == tag }
+    }
+
     override suspend fun create(hive: HiveModel) {
         val key = db.child("users").child(userId).child("hives").push().key
         key?.let {
@@ -43,6 +47,7 @@ class HiveFireStore(val context: Context) : HiveStore {
             foundHive.description = hive.description
             foundHive.image = hive.image
             foundHive.location = hive.location
+            foundHive.type = hive.type
         }
 
         db.child("users").child(userId).child("hives").child(hive.fbId).setValue(hive)
@@ -54,7 +59,6 @@ class HiveFireStore(val context: Context) : HiveStore {
     override suspend fun delete(hive: HiveModel) {
         deleteImage(hive)
         db.child("users").child(userId).child("hives").child(hive.fbId).removeValue()
-
         hives.remove(hive)
 
     }

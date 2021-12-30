@@ -34,7 +34,7 @@ class HiveAdapter constructor(private var hives: List<HiveModel>,
 
         fun bind(hive: HiveModel, listener: HiveListener) {
             binding.hiveTitle.text = hive.tag.toString()
-            binding.description.text = hive.description
+            binding.type.text = hive.type
             if (hive.image != ""){
                 Picasso.get()
                     .load(hive.image)

@@ -30,6 +30,7 @@ class HiveMemStore : HiveStore {
             foundHive.description = hive.description
             foundHive.image = hive.image
             foundHive.location = hive.location
+            foundHive.type = hive.type
             logAll()
         }
     }
@@ -45,6 +46,11 @@ class HiveMemStore : HiveStore {
         val foundHive: HiveModel? = hives.find { it.id == id }
         return foundHive
     }
+
+    override suspend fun findByTag(tag: Long): HiveModel? {
+        return hives.find { p -> p.tag == tag }
+    }
+
     override suspend fun clear(){
         hives.clear()
     }

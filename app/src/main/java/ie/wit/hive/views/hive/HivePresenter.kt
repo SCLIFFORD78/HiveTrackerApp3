@@ -60,8 +60,8 @@ class HivePresenter(private val view: HiveView) {
     }
 
 
-    suspend fun doAddOrSave(tag: Long, description: String) {
-        hive.tag = tag
+    suspend fun doAddOrSave(type: String, description: String) {
+        hive.type = type
         hive.description = description
         if (edit) {
             app.hives.update(hive)

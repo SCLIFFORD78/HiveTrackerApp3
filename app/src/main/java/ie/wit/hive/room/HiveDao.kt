@@ -15,6 +15,9 @@ interface HiveDao {
     @Query("select * from HiveModel where id = :id")
     suspend fun findById(id: Long): HiveModel
 
+    @Query("select * from HiveModel where tag = :tag")
+    suspend fun findByTag(tag: Long): HiveModel
+
     @Update
     suspend fun update(hive: HiveModel)
 
