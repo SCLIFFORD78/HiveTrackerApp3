@@ -49,12 +49,10 @@ class UserJSONStore(private val context: Context) : UserStore {
     override fun update(user: UserModel) {
         val founduser: UserModel? = users.find { p -> p.id == user.id }
         if (founduser != null) {
-            founduser.email = user.email
             founduser.firstName = user.firstName
             founduser.image = user.image
             founduser.lastName = user.lastName
             founduser.userName = user.userName
-            founduser.password = user.password
             logAll()
             serialize()
         }
@@ -65,11 +63,11 @@ class UserJSONStore(private val context: Context) : UserStore {
         serialize()
     }
 
-    override fun findByUsername(userName: String): UserModel? {
+    override suspend fun findByUsername(userName: String): UserModel? {
         return users.find { p -> p.userName == userName }
     }
 
-    override fun findByEmail(email: String): UserModel? {
+    override suspend fun findByEmail(email: String): UserModel? {
         return users.find { p -> p.email == email }
     }
 
@@ -85,6 +83,9 @@ class UserJSONStore(private val context: Context) : UserStore {
 
     private fun logAll() {
         users.forEach { Timber.i("$it") }
+    }
+    suspend fun clear(){
+        users.clear()
     }
 }
 
@@ -104,4 +105,6 @@ class UriParser : JsonDeserializer<Uri>,JsonSerializer<Uri> {
     ): JsonElement {
         return JsonPrimitive(src.toString())
     }
+
+
 }

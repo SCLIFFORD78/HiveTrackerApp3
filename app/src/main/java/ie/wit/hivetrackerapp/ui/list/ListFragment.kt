@@ -53,11 +53,13 @@ class ListFragment : Fragment(), HiveTrackerAdapter.OnHiveClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
 
         _fragBinding = FragmentListBinding.inflate(inflater, container, false)
@@ -177,12 +179,15 @@ class ListFragment : Fragment(), HiveTrackerAdapter.OnHiveClickListener {
 
     private fun render(hivesList: List<HiveModel>) {
         fragBinding.recyclerView.adapter = HiveTrackerAdapter(hivesList,this)
-        if (hivesList.isEmpty()) {
+        if(listViewModel.checkliveFirebaseUserDetails() == false){
+            Navigation.findNavController(this.requireView()).navigate(R.id.registerFragment)
+        }
+        else if (hivesList.isEmpty()) {
             fragBinding.recyclerView.visibility = View.GONE
-            fragBinding.hivesNotFound.visibility = View.VISIBLE
+            //fragBinding.hivesNotFound.visibility = View.VISIBLE
         } else {
             fragBinding.recyclerView.visibility = View.VISIBLE
-            fragBinding.hivesNotFound.visibility = View.GONE
+            //fragBinding.hivesNotFound.visibility = View.GONE
         }
     }
 

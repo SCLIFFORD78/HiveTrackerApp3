@@ -35,5 +35,9 @@
         android:name="ie.wit.hivetrackerapp.ui.map.MapsFragment"
         android:label="Map of Hive Locations"
         tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="ie.wit.hivetrackerapp.ui.register.RegisterFragment"
+        android:label="RegisterFragment" />
 
 </navigation>

@@ -34,7 +34,6 @@ object UserManager  : UserStore {
             founduser.image = user.image
             founduser.lastName = user.lastName
             founduser.userName = user.userName
-            founduser.password = user.password
             logAll()
         }
     }
@@ -43,11 +42,11 @@ object UserManager  : UserStore {
         users.remove(user)
     }
 
-    override fun findByUsername(userName: String): UserModel? {
+    override suspend fun findByUsername(userName: String): UserModel? {
         return users.find { p -> p.userName == userName }
     }
 
-    override fun findByEmail(email: String): UserModel? {
+    override suspend fun findByEmail(email: String): UserModel? {
         return users.find { p -> p.email == email }
     }
 

@@ -48,6 +48,7 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_register_short">Register</string>
+    <string name="prompt_secondname">Second Name</string>
 
     <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>

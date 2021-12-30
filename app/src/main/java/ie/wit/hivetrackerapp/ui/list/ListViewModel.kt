@@ -81,4 +81,15 @@ class ListViewModel : ViewModel() {
         val hives = HiveManager.findByOwner(userID)
         return hives
     }
+    fun checkliveFirebaseUserDetails(): Boolean{
+        val user = UserManager.findByEmail(liveFirebaseUser.value?.email.toString())
+        if (user != null) {
+            if (user.userName != null){
+                return true
+            }else{
+                return false
+            }
+        }
+        return false
+    }
 }

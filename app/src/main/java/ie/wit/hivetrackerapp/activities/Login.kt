@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import ie.wit.hivetrackerapp.databinding.LoginBinding
 import ie.wit.hivetrackerapp.ui.auth.LoginRegisterViewModel
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import ie.wit.hivetrackerapp.R
 import ie.wit.hivetrackerapp.activities.Home
 import timber.log.Timber
@@ -55,8 +57,8 @@ class Login : AppCompatActivity() {
     private fun createAccount(email: String, password: String) {
         Timber.d("createAccount:$email")
         if (!validateForm()) { return }
-
         loginRegisterViewModel.register(email,password)
+
     }
 
     private fun signIn(email: String, password: String) {
@@ -64,6 +66,7 @@ class Login : AppCompatActivity() {
         if (!validateForm()) { return }
 
         loginRegisterViewModel.login(email,password)
+
     }
 
     private fun checkStatus(error:Boolean) {

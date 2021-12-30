@@ -5,6 +5,7 @@ interface UserStore {
     fun create(user: UserModel)
     fun update(user: UserModel)
     fun delete(user: UserModel)
-    fun findByUsername(userName: String) :UserModel?
-    fun findByEmail(email: String): UserModel?
+    suspend fun findByUsername(userName: String) :UserModel?
+    suspend fun findByEmail(email: String): UserModel?
+    fun findById(id: Long): UserModel?
 }

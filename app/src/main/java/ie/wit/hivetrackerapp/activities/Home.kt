@@ -20,7 +20,11 @@ import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseUser
 import ie.wit.hivetrackerapp.databinding.HomeBinding
 import ie.wit.hivetrackerapp.databinding.NavHeaderBinding
+import ie.wit.hivetrackerapp.models.HiveJSONStore
+import ie.wit.hivetrackerapp.models.HiveStore
+import ie.wit.hivetrackerapp.models.UserStore
 import ie.wit.hivetrackerapp.ui.auth.Login
+import ie.wit.usertrackerapp.models.UserJSONStore
 
 class Home : AppCompatActivity(), HiveTrackerAdapter.Communicator {
     private lateinit var drawerLayout: DrawerLayout
@@ -29,10 +33,15 @@ class Home : AppCompatActivity(), HiveTrackerAdapter.Communicator {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var loggedInViewModel : LoggedInViewModel
     private val mFragmentManager = supportFragmentManager
+    lateinit var hives: HiveStore
+    lateinit var users: UserStore
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        hives = HiveJSONStore(applicationContext)
+        users = UserJSONStore(applicationContext)
 
         homeBinding = HomeBinding.inflate(layoutInflater)
         setContentView(homeBinding.root)
