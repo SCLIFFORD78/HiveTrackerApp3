@@ -20,14 +20,7 @@ class LoginView : AppCompatActivity(){
         binding.progressBar.visibility = View.GONE
 
         binding.signUp.setOnClickListener {
-            val email = binding.email.text.toString()
-            val password = binding.password.text.toString()
-            if (email == "" || password == "") {
-                showSnackBar("please provide email and password")
-            }
-            else {
-                presenter.doSignUp(email,password)
-            }
+            presenter.doSignUp()
         }
 
         binding.logIn.setOnClickListener {

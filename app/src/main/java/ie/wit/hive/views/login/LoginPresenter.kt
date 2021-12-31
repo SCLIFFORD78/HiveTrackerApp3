@@ -49,20 +49,9 @@ class LoginPresenter (val view: LoginView)  {
 
     }
 
-    fun doSignUp(email: String, password: String) {
-        view.showProgress()
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(view) { task ->
-            if (task.isSuccessful) {
-                fireStore!!.fetchHives {
-                    view?.hideProgress()
-                    val launcherIntent = Intent(view, HiveListView::class.java)
-                    loginIntentLauncher.launch(launcherIntent)
-                }
-            } else {
-                view.showSnackBar("Login failed: ${task.exception?.message}")
-            }
-            view.hideProgress()
-        }
+    fun doSignUp() {
+        val launcherIntent = Intent(view, RegisterView::class.java)
+        loginIntentLauncher.launch(launcherIntent)
     }
     private fun registerLoginCallback(){
         loginIntentLauncher =

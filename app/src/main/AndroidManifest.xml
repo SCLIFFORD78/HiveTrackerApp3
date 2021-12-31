@@ -43,6 +43,13 @@
             android:exported="true">
         </activity>
         <activity android:name=".views.hive.HiveView" />
+        <activity android:name=".views.login.RegisterView"
+            android:exported="true">
+        </activity>
+        <activity android:name=".views.aboutus.AboutUsView"
+            android:exported="true">
+
+        </activity>
     </application>
 
 </manifest>

@@ -21,7 +21,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:titleTextColor="@color/colorPrimary" />
+            android:background="@color/colorPrimary"
+            app:titleTextColor="@color/black"  />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -39,6 +40,17 @@
         app:layout_constraintVertical_bias="0.0">
 
 
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="297dp"
+            android:layout_height="139dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo" />
+
         <EditText
             android:id="@+id/email"
             android:layout_width="237dp"
@@ -51,7 +63,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/imageView4"/>
 
         <TextView
             android:id="@+id/textView"

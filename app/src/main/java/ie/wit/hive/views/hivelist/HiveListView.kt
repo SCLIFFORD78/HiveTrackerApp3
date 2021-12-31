@@ -1,5 +1,6 @@
 package ie.wit.hive.views.hivelist
 import android.os.Bundle
+import android.text.InputType
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
@@ -30,9 +31,9 @@ class HiveListView : AppCompatActivity(), HiveListener {
         //update Toolbar title
         binding.toolbar.title = title
         val user = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-            binding.toolbar.title = "${title}: ${user.email}"
-        }
+        //if (user != null) {
+        //    binding.toolbar.title = "${title}: ${user.email}"
+        //}
         setSupportActionBar(binding.toolbar)
 
         presenter = HiveListPresenter(this)
@@ -57,6 +58,7 @@ class HiveListView : AppCompatActivity(), HiveListener {
         when (item.itemId) {
             R.id.item_add -> { presenter.doAddHive() }
             R.id.item_map -> { presenter.doShowHivesMap() }
+            R.id.aboutus -> { presenter.doShowAboutUs() }
             R.id.item_logout -> {
                 GlobalScope.launch(Dispatchers.IO) {
                     presenter.doLogout()
@@ -75,6 +77,7 @@ class HiveListView : AppCompatActivity(), HiveListener {
         menuInflater.inflate(R.menu.menu_main, menu)
         val search = menu.findItem(R.id.appSearchBar)
         val searchView = search.actionView as SearchView
+        searchView.setInputType(InputType.TYPE_CLASS_NUMBER);
         searchView.queryHint = "Tag Number or 0 for all hives"
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -107,10 +110,10 @@ class HiveListView : AppCompatActivity(), HiveListener {
                         value = newText
                     }
                 }
-                if(value.toString().toLong() > 0 && value !=null){
+                if(value.toLong() > 0 && value !=null){
                     updateRecyclerView(newText.toString().toLong())
                     searchView.clearFocus()
-                }else if(value.toString().toInt() == 0 ){
+                }else if(value.toInt() == 0 ){
                     updateRecyclerView(0)
                     searchView.clearFocus()
                 }

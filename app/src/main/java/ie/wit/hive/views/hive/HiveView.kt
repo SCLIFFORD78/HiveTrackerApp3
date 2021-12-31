@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.ui.AppBarConfiguration
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
@@ -23,6 +25,7 @@ class HiveView : AppCompatActivity() {
     private lateinit var presenter: HivePresenter
     lateinit var map: GoogleMap
     var hive = HiveModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

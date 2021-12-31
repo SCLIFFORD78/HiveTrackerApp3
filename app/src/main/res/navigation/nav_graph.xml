@@ -3,26 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
-
-    <fragment
-        android:id="@+id/FirstFragment"
-        android:name="ie.wit.hive.activities.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="ie.wit.hive.activities.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+    app:startDestination="@id/hiveView">
+    <activity
+        android:id="@+id/hiveView"
+        android:name="ie.wit.hive.views.hive.HiveView"
+        android:label="activity_hive"
+        tools:layout="@layout/activity_hive" />
+    <activity
+        android:id="@+id/hiveListView"
+        android:name="ie.wit.hive.views.hivelist.HiveListView"
+        android:label="activity_hive_list"
+        tools:layout="@layout/activity_hive_list" />
+    <activity
+        android:id="@+id/hiveMapView"
+        android:name="ie.wit.hive.views.map.HiveMapView"
+        android:label="activity_hive_maps"
+        tools:layout="@layout/activity_hive_maps" />
+    <activity
+        android:id="@+id/loginView"
+        android:name="ie.wit.hive.views.login.LoginView"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
 </navigation>
