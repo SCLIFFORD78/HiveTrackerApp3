@@ -2,6 +2,7 @@ package ie.wit.hive.models
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.service.autofill.Dataset
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
@@ -13,6 +14,7 @@ import java.io.File
 
 class UserFireStore(val context: Context) : UserStore {
     val users = ArrayList<UserModel>()
+    val userCheck : Array<Iterable<DataSnapshot>?> = arrayOfNulls(1)
     lateinit var userId: String
     lateinit var db: DatabaseReference
     lateinit var st: StorageReference
@@ -55,11 +57,7 @@ class UserFireStore(val context: Context) : UserStore {
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                dataSnapshot!!.children.mapNotNullTo(users) {
-                    it.getValue<UserModel>(
-                        UserModel::class.java
-                    )
-                }
+                userCheck[0] = dataSnapshot!!.children
                 usersReady()
             }
         }

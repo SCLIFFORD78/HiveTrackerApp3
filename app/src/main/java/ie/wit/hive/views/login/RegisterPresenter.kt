@@ -6,7 +6,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.google.firebase.auth.FirebaseAuth
 import ie.wit.hive.main.MainApp
 import ie.wit.hive.models.HiveFireStore
-import ie.wit.hive.models.User
 import ie.wit.hive.models.UserFireStore
 import ie.wit.hive.models.UserModel
 import ie.wit.hive.views.hivelist.HiveListView

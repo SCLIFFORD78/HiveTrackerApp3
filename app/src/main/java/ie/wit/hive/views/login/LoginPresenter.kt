@@ -3,11 +3,19 @@ package ie.wit.hive.views.login
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import ie.wit.hive.R
 import ie.wit.hive.main.MainApp
 import ie.wit.hive.models.HiveFireStore
+import ie.wit.hive.models.HiveModel
+import ie.wit.hive.models.UserFireStore
+import ie.wit.hive.models.UserModel
 import ie.wit.hive.views.hivelist.HiveListView
-
+import kotlinx.coroutines.runBlocking
 
 
 class LoginPresenter (val view: LoginView)  {
@@ -15,14 +23,26 @@ class LoginPresenter (val view: LoginView)  {
     var app: MainApp = view.application as MainApp
     var auth: FirebaseAuth = FirebaseAuth.getInstance()
     var fireStore: HiveFireStore? = null
+    var userFireStore: UserFireStore? = null
+
 
     init{
         registerLoginCallback()
         if (app.hives is HiveFireStore) {
             fireStore = app.hives as HiveFireStore
         }
+        if (app.users is UserFireStore) {
+            userFireStore = app.users as UserFireStore
+        }
     }
 
+
+    suspend fun checkUserDetails():Boolean{
+        runBlocking { userFireStore!!.fetchUsers(){  } }
+        val users = app.users.findAll()
+        var foundUser = users.find { p -> p.fbId == "11"}
+        return foundUser != null
+    }
 
     fun doLogin(email: String, password: String) {
         view.showProgress()
