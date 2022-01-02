@@ -43,6 +43,8 @@ class HiveListView : AppCompatActivity(), HiveListener {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         updateRecyclerView(0)
+        setSwipeRefresh()
+        checkSwipeRefresh()
     }
 
 
@@ -131,6 +133,18 @@ class HiveListView : AppCompatActivity(), HiveListener {
         return super.onCreateOptionsMenu(menu)
     }
 
+    private fun setSwipeRefresh() {
+        binding.swiperefresh.setOnRefreshListener {
+            binding.swiperefresh.isRefreshing = true
+            updateRecyclerView(0)
+        }
+    }
+
+    private fun checkSwipeRefresh() {
+        if (binding.swiperefresh.isRefreshing)
+            binding.swiperefresh.isRefreshing = false
+    }
+
 
     private fun updateRecyclerView(tag:Long){
         var test = tag
@@ -139,13 +153,13 @@ class HiveListView : AppCompatActivity(), HiveListener {
                 binding.recyclerView.adapter =
                     HiveAdapter(presenter.getHiveByTag(tag), this@HiveListView)
             }
+            checkSwipeRefresh()
         }else{
             GlobalScope.launch(Dispatchers.Main){
             binding.recyclerView.adapter =
                 presenter.getHives()?.let { HiveAdapter(it, this@HiveListView) }
         }
-
-
+            checkSwipeRefresh()
         } }
 
 }
