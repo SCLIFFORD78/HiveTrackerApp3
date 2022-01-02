@@ -25,8 +25,21 @@ class HiveListPresenter(private val view: HiveListView) {
         registerRefreshCallback()
     }
 
-    suspend fun getHives() = FirebaseAuth.getInstance().currentUser?.let { app.hives.findByOwner(it.uid) }
+    suspend fun getHives() = FirebaseAuth.getInstance().currentUser?.let { app.hives.findByOwner(it.uid).sortedBy { it.tag } }
     suspend fun getUsers() = app.users.findAll()
+    //suspend fun findByType(type: String)= app.hives.findByType(type)
+    suspend fun findByType(type: String): List<HiveModel> {
+        val resp: MutableList<HiveModel> = mutableListOf()
+        val hives = getHives()
+        if (hives != null) {
+            for (hive in hives) if(hive.type == type) {
+                resp.add(0,hive)
+            }
+        }
+        return if (resp.isNotEmpty()){
+            resp
+        } else emptyList()
+    }
 
     suspend fun getHiveByTag(tag:Long):List<HiveModel>{
         var list : ArrayList<HiveModel> = arrayListOf()
@@ -38,6 +51,7 @@ class HiveListPresenter(private val view: HiveListView) {
 
         return list
     }
+
 
 
     fun doAddHive() {

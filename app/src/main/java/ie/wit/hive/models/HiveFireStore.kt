@@ -30,6 +30,16 @@ class HiveFireStore(val context: Context) : HiveStore {
         } else emptyList()
     }
 
+    override suspend fun findByType(type: String): List<HiveModel> {
+        val resp: MutableList<HiveModel> = mutableListOf()
+        for (hive in hives) if(hive.type == type) {
+            resp.add(0,hive)
+        }
+        return if (resp.isNotEmpty()){
+            resp
+        } else emptyList()
+    }
+
     override suspend fun findById(id: Long): HiveModel? {
         val foundHive: HiveModel? = hives.find { p -> p.id == id }
         return foundHive

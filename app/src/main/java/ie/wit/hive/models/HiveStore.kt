@@ -3,6 +3,7 @@ package ie.wit.hive.models
 interface HiveStore {
     suspend fun findAll(): List<HiveModel>
     suspend fun findByOwner(userID: String): List<HiveModel>
+    suspend fun findByType(type: String): List<HiveModel>
     suspend fun create(hive: HiveModel)
     suspend fun update(hive: HiveModel)
     suspend fun findById(id:Long) : HiveModel?

@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
@@ -45,6 +46,8 @@ class HiveListView : AppCompatActivity(), HiveListener {
         updateRecyclerView(0)
         setSwipeRefresh()
         checkSwipeRefresh()
+
+
     }
 
 
@@ -60,6 +63,7 @@ class HiveListView : AppCompatActivity(), HiveListener {
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         when (item.itemId) {
             R.id.item_add -> { presenter.doAddHive() }
             R.id.item_map -> { presenter.doShowHivesMap() }
@@ -69,12 +73,23 @@ class HiveListView : AppCompatActivity(), HiveListener {
                     presenter.doLogout()
                 }
             }
+            R.id.update -> { setUpdateSearchHiveType() }
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onHiveClick(hive: HiveModel) {
         presenter.doEditHive(hive)
+
+    }
+
+    private fun setUpdateSearchHiveType() {
+        val type = binding.hiveTypeSpinnerSearch.selectedItem.toString()
+        if(type == "All Hive Types"){
+            updateRecyclerView(0) }
+        else{
+            updateRecyclerViewHiveType(type)
+        }
 
     }
 
@@ -137,6 +152,7 @@ class HiveListView : AppCompatActivity(), HiveListener {
         binding.swiperefresh.setOnRefreshListener {
             binding.swiperefresh.isRefreshing = true
             updateRecyclerView(0)
+            binding.hiveTypeSpinnerSearch.setSelection(0)
         }
     }
 
@@ -161,5 +177,12 @@ class HiveListView : AppCompatActivity(), HiveListener {
         }
             checkSwipeRefresh()
         } }
+
+    private fun updateRecyclerViewHiveType(type: String){
+        GlobalScope.launch(Dispatchers.Main){
+            binding.recyclerView.adapter =
+                HiveAdapter(presenter.findByType(type), this@HiveListView)
+        }
+    }
 
 }

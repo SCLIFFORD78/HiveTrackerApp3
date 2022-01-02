@@ -24,16 +24,34 @@
             android:background="@color/colorPrimary"
             app:titleTextColor="@color/black" />
 
+        <Spinner
+            android:id="@+id/hiveTypeSpinnerSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:layout_gravity="fill"
+            android:layout_margin="0dp"
+            android:background="@android:color/holo_orange_dark"
+            android:clickable="true"
+            android:entries="@array/hiveTypeSearch"
+            android:hint="@string/hint_hiveType"
+            android:spinnerMode="dialog"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            tools:ignore="RtlCompat" />
+
 
 
     </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="110dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

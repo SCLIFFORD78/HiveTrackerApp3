@@ -41,6 +41,8 @@
     <string name="menu_showMap">Show Map</string>
     <string name="menu_logout">Logout</string>
 
+    <string name="button_update_search">Update List</string>
+
     <string name="action_about">About Us</string>
     <string name="aboutus_tag">Hive Tracker App</string>
     <string name="aboutus_message">Hi, Welcome\n\nOur app will help track hives.\n\n So we can help the Bee Population</string>

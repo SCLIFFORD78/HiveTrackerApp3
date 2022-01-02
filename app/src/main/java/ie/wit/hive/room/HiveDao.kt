@@ -21,6 +21,9 @@ interface HiveDao {
     @Query("select * from HiveModel where fbId = :userID")
     suspend fun findByOwner(userID: String): List<HiveModel>
 
+    @Query("select * from HiveModel where type = :type")
+    suspend fun findByType(type: String): List<HiveModel>
+
     @Update
     suspend fun update(hive: HiveModel)
 

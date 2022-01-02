@@ -25,6 +25,10 @@ class HiveStoreRoom(val context: Context) : HiveStore {
         return dao.findAll()
     }
 
+    override suspend fun findByType(type: String): List<HiveModel> {
+        return dao.findByType(type)
+    }
+
     override suspend fun findById(id: Long): HiveModel? {
         return dao.findById(id)
     }
