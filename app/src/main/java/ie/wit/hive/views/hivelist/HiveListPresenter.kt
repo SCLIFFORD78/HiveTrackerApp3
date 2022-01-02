@@ -88,7 +88,7 @@ class HiveListPresenter(private val view: HiveListView) {
             view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
             {
                 GlobalScope.launch(Dispatchers.Main){
-                    getHives()
+                    //getHives()
                 }
                 GlobalScope.launch(Dispatchers.Main){
                     getUsers()

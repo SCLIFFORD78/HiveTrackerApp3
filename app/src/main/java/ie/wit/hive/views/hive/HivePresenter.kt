@@ -35,7 +35,7 @@ class HivePresenter(private val view: HiveView) {
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
     var edit = false;
-    private val location = Location(52.245696, -7.139102, 15f)
+    private val location = Location(52.0634310, -9.6853542, 15f)
 
     init {
 
