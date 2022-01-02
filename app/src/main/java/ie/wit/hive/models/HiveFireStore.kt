@@ -20,6 +20,16 @@ class HiveFireStore(val context: Context) : HiveStore {
         return hives
     }
 
+    override suspend fun findByOwner(userID: String): List<HiveModel> {
+        val resp: MutableList<HiveModel> = mutableListOf()
+        for (hive in hives) if(hive.user == userID) {
+            resp.add(0,hive)
+        }
+        return if (resp.isNotEmpty()){
+            resp
+        } else emptyList()
+    }
+
     override suspend fun findById(id: Long): HiveModel? {
         val foundHive: HiveModel? = hives.find { p -> p.id == id }
         return foundHive
@@ -30,12 +40,13 @@ class HiveFireStore(val context: Context) : HiveStore {
     }
 
     override suspend fun create(hive: HiveModel) {
-        val key = db.child("users").child(userId).child("hives").push().key
+        val key = db.child("hives").push().key
         key?.let {
             hive.fbId = key
             hive.tag = getTag()
+            hive.user = userId
             hives.add(hive)
-            db.child("users").child(userId).child("hives").child(key).setValue(hive)
+            db.child("hives").child(key).setValue(hive)
             updateImage(hive)
         }
     }
@@ -50,7 +61,7 @@ class HiveFireStore(val context: Context) : HiveStore {
             foundHive.type = hive.type
         }
 
-        db.child("users").child(userId).child("hives").child(hive.fbId).setValue(hive)
+        db.child("hives").child(hive.fbId).setValue(hive)
         if(hive.image.length > 0){
             updateImage(hive)
         }
@@ -58,7 +69,7 @@ class HiveFireStore(val context: Context) : HiveStore {
 
     override suspend fun delete(hive: HiveModel) {
         deleteImage(hive)
-        db.child("users").child(userId).child("hives").child(hive.fbId).removeValue()
+        db.child("hives").child(hive.fbId).removeValue()
         hives.remove(hive)
 
     }
@@ -93,7 +104,7 @@ class HiveFireStore(val context: Context) : HiveStore {
         st = FirebaseStorage.getInstance().reference
         db = FirebaseDatabase.getInstance("https://hivetrackerapp3-default-rtdb.firebaseio.com/").reference
         hives.clear()
-        db.child("users").child(userId).child("hives")
+        db.child("hives")
             .addListenerForSingleValueEvent(valueEventListener)
     }
     fun deleteImage(hive: HiveModel){
@@ -125,7 +136,7 @@ class HiveFireStore(val context: Context) : HiveStore {
                 uploadTask.addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
                         hive.image = it.toString()
-                        db.child("users").child(userId).child("hives").child(hive.fbId).setValue(hive)
+                        db.child("hives").child(hive.fbId).setValue(hive)
                     }
                 }.addOnFailureListener{
                     var errorMessage = it.message

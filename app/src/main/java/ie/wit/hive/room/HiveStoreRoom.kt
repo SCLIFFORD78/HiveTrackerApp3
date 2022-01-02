@@ -2,6 +2,7 @@ package ie.wit.hive.room
 
 import android.content.Context
 import androidx.room.Room
+import com.google.firebase.auth.FirebaseAuth
 import ie.wit.hive.models.HiveModel
 import ie.wit.hive.models.HiveStore
 
@@ -17,6 +18,10 @@ class HiveStoreRoom(val context: Context) : HiveStore {
     }
 
     override suspend fun findAll(): List<HiveModel> {
+        return dao.findAll()
+    }
+
+    override suspend fun findByOwner(userID: String): List<HiveModel> {
         return dao.findAll()
     }
 
@@ -44,9 +49,11 @@ class HiveStoreRoom(val context: Context) : HiveStore {
 
     override suspend fun getTag(): Long {
         var num:Long = 1
-        var hives = this.findAll()
-        while (hives.find { p -> p.tag == num } != null){
-            num++
+        var hives = FirebaseAuth.getInstance().currentUser?.let { this.findByOwner(it.uid) }
+        if (hives != null) {
+            while (hives.find { p -> p.tag == num } != null){
+                num++
+            }
         }
         return num
     }

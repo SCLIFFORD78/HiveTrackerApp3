@@ -25,12 +25,13 @@ class HiveListPresenter(private val view: HiveListView) {
         registerRefreshCallback()
     }
 
-    suspend fun getHives() = app.hives.findAll()
+    suspend fun getHives() = FirebaseAuth.getInstance().currentUser?.let { app.hives.findByOwner(it.uid) }
+    suspend fun getUsers() = app.users.findAll()
 
     suspend fun getHiveByTag(tag:Long):List<HiveModel>{
         var list : ArrayList<HiveModel> = arrayListOf()
         var hives = getHives()
-        val foundhive = hives.find { p -> p.tag == tag }
+        val foundhive = hives?.find { p -> p.tag == tag }
         if (foundhive != null) {
             list.add(0,foundhive)
         }
@@ -63,6 +64,7 @@ class HiveListPresenter(private val view: HiveListView) {
     suspend fun doLogout(){
         FirebaseAuth.getInstance().signOut()
         app.hives.clear()
+        app.users.clear()
         val launcherIntent = Intent(view, LoginView::class.java)
         editIntentLauncher.launch(launcherIntent)
     }
@@ -73,6 +75,9 @@ class HiveListPresenter(private val view: HiveListView) {
             {
                 GlobalScope.launch(Dispatchers.Main){
                     getHives()
+                }
+                GlobalScope.launch(Dispatchers.Main){
+                    getUsers()
                 }
             }
     }

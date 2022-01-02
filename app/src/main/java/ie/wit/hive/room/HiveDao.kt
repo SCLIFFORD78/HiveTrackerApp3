@@ -18,6 +18,9 @@ interface HiveDao {
     @Query("select * from HiveModel where tag = :tag")
     suspend fun findByTag(tag: Long): HiveModel
 
+    @Query("select * from HiveModel where fbId = :userID")
+    suspend fun findByOwner(userID: String): List<HiveModel>
+
     @Update
     suspend fun update(hive: HiveModel)
 

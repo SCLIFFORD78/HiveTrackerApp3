@@ -139,7 +139,7 @@ class HiveListView : AppCompatActivity(), HiveListener {
         }else{
             GlobalScope.launch(Dispatchers.Main){
             binding.recyclerView.adapter =
-                HiveAdapter(presenter.getHives(), this@HiveListView)
+                presenter.getHives()?.let { HiveAdapter(it, this@HiveListView) }
         }
 
 

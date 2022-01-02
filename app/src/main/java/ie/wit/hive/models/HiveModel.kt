@@ -12,6 +12,7 @@ import java.util.*
 @Entity
 data class HiveModel(@PrimaryKey(autoGenerate = true) var id: Long = 0,
                      var fbId: String = "",
+                     var user: String = "",
                      var tag: Long = 0,
                      var description: String = "",
                      var image: String = "",

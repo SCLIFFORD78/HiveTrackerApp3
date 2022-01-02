@@ -36,12 +36,36 @@ class LoginPresenter (val view: LoginView)  {
         }
     }
 
+    suspend fun getUsers() = app.users.findAll()
 
-    suspend fun checkUserDetails():Boolean{
-        runBlocking { userFireStore!!.fetchUsers(){  } }
-        val users = app.users.findAll()
-        var foundUser = users.find { p -> p.fbId == "11"}
-        return foundUser != null
+
+    fun doGoogleLoginRedirect(){
+        view.showProgress()
+        if (fireStore != null && userFireStore != null) {
+            fireStore!!.fetchHives {
+                userFireStore!!.fetchUsers {
+                    var users = userFireStore!!.users
+                    val checkedUser = users.find { p -> p.fbId == userFireStore!!.userId }
+                    if (checkedUser != null){
+                        view?.hideProgress()
+                        val launcherIntent = Intent(view, HiveListView::class.java)
+                        loginIntentLauncher.launch(launcherIntent)
+                    }else{
+                        view?.hideProgress()
+                        val launcherIntent = Intent(view, GoogleRegisterView::class.java)
+                        loginIntentLauncher.launch(launcherIntent)
+                    }
+
+                }
+
+            }
+        } else {
+            view?.hideProgress()
+            val launcherIntent = Intent(view, HiveListView::class.java)
+            loginIntentLauncher.launch(launcherIntent)
+        }
+
+        view.hideProgress()
     }
 
     fun doLogin(email: String, password: String) {

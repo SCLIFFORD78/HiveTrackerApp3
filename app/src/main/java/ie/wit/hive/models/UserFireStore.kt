@@ -29,7 +29,7 @@ class UserFireStore(val context: Context) : UserStore {
     override suspend fun create(user: UserModel) {
         val key = db.child("users").child(userId).push().key
         key?.let {
-            user.fbId = key
+            user.fbId = userId
             users.add(user)
             db.child("users").child(userId).setValue(user)
             updateImage(user)
@@ -57,7 +57,12 @@ class UserFireStore(val context: Context) : UserStore {
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                userCheck[0] = dataSnapshot!!.children
+                dataSnapshot!!.children.mapNotNullTo(users) {
+                    var test = users
+                    it.getValue<UserModel>(
+                        UserModel::class.java
+                    )
+                }
                 usersReady()
             }
         }
@@ -65,7 +70,7 @@ class UserFireStore(val context: Context) : UserStore {
         st = FirebaseStorage.getInstance().reference
         db = FirebaseDatabase.getInstance("https://hivetrackerapp3-default-rtdb.firebaseio.com/").reference
         users.clear()
-        db.child("users").child(userId)
+        db.child("users")
             .addListenerForSingleValueEvent(valueEventListener)
     }
     fun deleteImage(user: UserModel){

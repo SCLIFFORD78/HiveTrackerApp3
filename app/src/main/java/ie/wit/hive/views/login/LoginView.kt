@@ -88,14 +88,11 @@ class LoginView : AppCompatActivity(){
         presenter.auth!!.signInWithCredential(credential)
             .addOnCompleteListener(application!!.mainExecutor) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update with the signed-in user's information
-                    Timber.i( "signInWithCredential:success")
-                    if(runBlocking { presenter.checkUserDetails() } == true){
-                        print("yes")
-                    }else{
-                        print("No")
+                    presenter.userFireStore?.fetchUsers { // Sign in success, update with the signed-in user's information
+                        Timber.i("signInWithCredential:success")
+                        presenter.doGoogleLoginRedirect()
+                        //liveFirebaseUser.postValue(firebaseAuth!!.currentUser) }
                     }
-                    //liveFirebaseUser.postValue(firebaseAuth!!.currentUser)
 
                 } else {
                     // If sign in fails, display a message to the user.

@@ -25,7 +25,7 @@ class AboutUsPresenter(val view: AboutUsView) {
         registerRefreshCallback()
     }
 
-    suspend fun getHives() = app.hives.findAll()
+    suspend fun getHives() = FirebaseAuth.getInstance().currentUser?.let { app.hives.findByOwner(it.uid) }
 
 
 
