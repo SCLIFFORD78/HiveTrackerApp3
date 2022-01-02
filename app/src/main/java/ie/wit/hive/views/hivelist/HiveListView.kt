@@ -35,6 +35,9 @@ class HiveListView : AppCompatActivity(), HiveListener {
         //    binding.toolbar.title = "${title}: ${user.email}"
         //}
         setSupportActionBar(binding.toolbar)
+        binding.floatingAddButton.setOnClickListener{
+            presenter.doAddHive()
+        }
 
         presenter = HiveListPresenter(this)
         val layoutManager = LinearLayoutManager(this)
